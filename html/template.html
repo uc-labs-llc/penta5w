@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational Template: [Contributor Lesson Title]</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* --- INTEGRATED STYLES --- */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+        /* Base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f0f23;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Dashboard Grid */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        @media (min-width: 1024px) {
+            .dashboard {
+                grid-template-columns: 300px 1fr;
+            }
+        }
+
+        /* Sidebar & Card Styling */
+        .sidebar {
+            background: #1a1a2e;
+            padding: 1.5rem;
+            border-radius: 10px;
+            height: fit-content;
+            border: 1px solid #2d2d4d;
+        }
+        .sidebar-section { margin-bottom: 2rem; }
+        .sidebar-section h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        .nav-list { list-style: none; }
+        .nav-list a {
+            display: block;
+            padding: 10px 12px;
+            margin: 4px 0;
+            border-radius: 6px;
+            color: #a0a0c0;
+            transition: background-color 0.2s, color 0.2s;
+            text-decoration: none;
+        }
+        .nav-list a:hover {
+            background: #252547;
+            color: #fff;
+        }
+        hr { border: none; height: 1px; background-color: #2d2d4d; margin: 1.5rem 0; }
+        
+        /* Dropdown specific styles */
+        .dropdown-toggle {
+            cursor: pointer;
+            padding: 10px;
+            background: #252547;
+            border-radius: 6px;
+            color: #667eea;
+            font-weight: bold;
+            transition: background-color 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .dropdown-menu {
+            list-style: none;
+            padding: 5px 0;
+            background: #252547;
+            border-radius: 6px;
+            margin-top: 5px;
+        }
+        .dropdown-menu a {
+            padding-left: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .main-content {
+            padding-bottom: 4rem;
+        }
+
+        /* Content Card Styling */
+        .content-card {
+            background: #1a1a2e;
+            border: 1px solid #2d2d4d;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            padding: 30px;
+        }
+
+        /* 5W Section Styling */
+        .w-section {
+            background: #252547;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            border-left: 5px solid;
+            transition: transform 0.2s;
+        }
+        .w-section h2 {
+            font-size: 1.75rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        .w-section p {
+            margin-bottom: 0.75rem;
+            color: #ccc;
+        }
+        
+        /* Specific accent colors for each W (using your colors) */
+        .w-who { border-left-color: #00b894; } 
+        .w-who h2 { color: #00b894; }
+        .w-why { border-left-color: #667eea; } 
+        .w-why h2 { color: #667eea; }
+        .w-what { border-left-color: #fdcb6e; } 
+        .w-what h2 { color: #fdcb6e; }
+        .w-where { border-left-color: #74b9ff; } 
+        .w-where h2 { color: #74b9ff; }
+        .w-how { border-left-color: #ff6b6b; } 
+        .w-how h2 { color: #ff6b6b; }
+        
+        /* List styles */
+        .w-section ul {
+            list-style: disc;
+            margin-left: 1.5rem;
+            color: #ccc;
+        }
+
+        /* Code Display Block */
+        .code-display {
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            margin: 1rem 0;
+            padding: 15px;
+            background: #1a1a2e;
+            border: 1px solid #2d2d4d;
+            border-radius: 8px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            line-height: 1.4;
+        }
+        
+        /* New Instructions Box Style */
+        .instructions-box {
+            background-color: #2d2d4d;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            border-left: 5px solid #fdcb6e;
+        }
+        .instructions-box h2 {
+            color: #fdcb6e;
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .instructions-box p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="dashboard">
+
+            <div class="sidebar">
+                <div class="sidebar-section">
+                    <h3 class="text-xl">📚 Course Navigation</h3>
+                    <ul class="nav-list">
+                        <li><a href="#">Sample Python Section 1</a></li>
+                        <li><a href="#">Sample Python Section 2</a></li>
+                        <li>
+                            <div class="dropdown-toggle" onclick="toggleDropdown('lesson-dropdown')">
+                                Contributor Lessons
+                                <span>&#9660;</span>
+                            </div>
+                            <ul id="lesson-dropdown" class="dropdown-menu" style="display: block;">
+                                <li><a href="#">&#8227; **THIS LESSON**</a></li>
+                                <li><a href="#">&#8227; Other Contrib. Example</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Advanced Concepts</a></li>
+                    </ul>
+                </div>
+                <hr>
+                <div class="sidebar-section">
+                    <h3>💡 Get Involved</h3>
+                    <ul class="nav-list">
+                        <li><a href="#">**CONTRIBUTING GUIDELINES**</a></li>
+                        <li><a href="[INSERT GITHUB REPO URL HERE]">GitHub: penta5w</a></li> 
+                    </ul>
+                </div>
+            </div>
+	    <div class="main-content">
+                <div class="content-card">
+                    <h1 class="text-4xl font-extrabold mb-2 text-[#667eea] flex items-center">
+                        <span class="mr-3">🐍</span> Contributor Lesson Title: [Insert Title Here]
+                    </h1>
+                    
+                    <div class="instructions-box">
+                        <h2>⚠️ Contribution Instructions</h2>
+                        <p> Remember, this is just an exmple TEMPLATE FILE, you may need to adjust it for your Who, What, Why, Where, Whow. This file serves as the **Presentation Wrapper** for your lesson. Please adhere to the following rules when submitting your Pull Request (PR):</p>
+                        <ul style="list-style: decimal; margin-left: 20px; color: #fff;">
+                            <li>**File Naming:** Ensure your HTML file (the copy of this template) and your Python file have the **same descriptive base name** (e.g., `list-comp.html` and `list-comp.py`).</li>
+                            <li>**HTML Submission:** This HTML file (the template copy) and any **related CSS files** should be placed in the **`contributions/html/`** folder.</li>
+                            <li>**Python Submission:** The corresponding **Python code file** must have a **`.py` extension** and be placed in the **`contributions/python/`** folder.</li>
+                            <li>**Content Focus:** Fill out the 5W sections below completely. The partial code exmaple or foumala itself should be pasted into the designated **Code Display** box under the **How** section.</li>
+</script>
+                        </ul>
+                    </div>
+
+                    <p class="text-gray-400 mb-8 text-lg">
+                        This document presents the Python code example using the 5W structure. The code is found in the accompanying **[Insert Matching Filename].py** file.
+                    </p>
+
+                    <div class="w-section w-who">
+                        <h2>Who (Author & Audience)</h2>
+                        <p><strong>Who created this code?</strong> [Contributor Name/GitHub Handle].</p>
+                        <p><strong>Who is the target audience?</strong> [e.g., Beginners learning lists, intermediate users studying decorators, etc.].</p>
+                    </div>
+
+                    <div class="w-section w-what">
+                        <h2>What (The Core Concept)</h2>
+                        <p><strong>What does this code do?</strong> [A one-sentence summary of the function/purpose].</p>
+                        <p><strong>Key features and functions:</strong></p>
+                        <ul>
+                            <li>[List the main Python features or libraries used].</li>
+                            <li>[Describe the inputs and expected outputs].</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="w-section w-why">
+                        <h2>Why (Utility & Purpose)</h2>
+                        <p><strong>Why is this concept important?</strong> [Explain the importance of this technique in programming].</p>
+                        <p><strong>Why is this implementation preferred?</strong> [Justify why this specific code approach was chosen over others (e.g., efficiency, readability)].</p>
+                    </div>
+
+                    <div class="w-section w-where">
+                        <h2>Where (Context & Application)</h2>
+                        <p><strong>Where does this concept fit in Python?</strong> [Mention related concepts or modules (e.g., it's a core data structure, it relies on the `math` library, etc.)].</p>
+                        <p><strong>Where does this type of logic typically operate?</strong> [e.g., on a server, in a command-line script, embedded in a data pipeline].</p>
+                    </div>
+
+                    <div class="w-section w-how">
+                        <h2>How (Modern Usage & Real-World Examples)</h2>
+                        <p><strong>How is this being used in today's modern society?</strong> This section details the practical, large-scale application of this code's underlying concept.</p>
+                        <ul>
+                            <li>**E-commerce (Amazon/eBay):** [Example of how this concept, e.g., list manipulation, is used in cart management or product filtering].</li>
+                            <li>**Government/Science (NASA):** [Example of how this concept is essential for data processing, simulation setup, or telemetry].</li>
+                            <li>**Financial Institutions (Banks):** [Example of use in transaction processing, risk analysis, or ledger management].</li>
+                        </ul>
+                        <p>The Python code below demonstrates the core logic:</p>
+                        <div class="code-display">
+# CONTRIBUTOR: Paste your complete, formatted Python code here.
+# Ensure variable names are descriptive and comments are clear.
+
+def sample_function(data):
+    # Example comment explaining the mechanism
+    result = [item * 2 for item in data if item > 0]
+    return result
+
+# Sample Usage:
+input_data = [1, 5, -2, 8]
+output = sample_function(input_data)
+# Expected output: [2, 10, 16]
+                        </div>
+                    </div>
+                </div>
+            </div> </div> </div> <footer style="text-align: center; padding-top: 1.5rem; margin-top: 2rem; border-top: 1px solid #2d2d4d; color: #a0a0c0; background-color: #0f0f23;">
+        <div class="copyright">
+            <p>&copy; 2025 [Your Site Name]. All rights reserved.</p>
+            <p><em>Educational template for community contributions.</em></p>
+        </div>
+    </footer>
+
+    <script>
+        /** Toggles the visibility of a dropdown menu. */
+        function toggleDropdown(id) {
+            const menu = document.getElementById(id);
+            if (menu.style.display === 'none' || menu.style.display === '') {
+                menu.style.display = 'block';
+            } else {
+                menu.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
